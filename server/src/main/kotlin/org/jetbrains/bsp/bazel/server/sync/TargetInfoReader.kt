@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.bsp.bazel.info.BspTargetInfo.CppTargetInfo
+import org.jetbrains.bsp.bazel.info.BspTargetInfo.GoTargetInfo
 import org.jetbrains.bsp.bazel.info.BspTargetInfo.JavaRuntimeInfo
 import org.jetbrains.bsp.bazel.info.BspTargetInfo.JvmTargetInfo
 import org.jetbrains.bsp.bazel.info.BspTargetInfo.JavaToolchainInfo
@@ -110,6 +111,12 @@ class TargetInfoReader {
             val builder: JavaToolchainInfo.Builder = readFromFile(uri, JavaToolchainInfo.newBuilder())
             val info = builder.build()
             targetInfoBuilder.setJavaToolchainInfo(info)
+        }
+
+        "go_target_info" -> {
+            val builder: GoTargetInfo.Builder = readFromFile(uri, GoTargetInfo.newBuilder())
+            val info = builder.build()
+            targetInfoBuilder.mergeFrom(info)
         }
 
         "general" -> {

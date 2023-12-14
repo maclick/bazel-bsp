@@ -75,6 +75,11 @@ message PythonTargetInfo {
   string version = 2;
 }
 
+message GoTargetInfo {
+  string importpath = 1;
+  string sdk_home_path = 2;
+}
+
 message TargetInfo {
   string id = 10;
   string kind = 20;
@@ -92,4 +97,5 @@ message TargetInfo {
   CppTargetInfo cpp_target_info = 6000;
   KotlinTargetInfo kotlin_target_info = 7000;
   PythonTargetInfo python_target_info = 8000;
+  GoTargetInfo go_target_info = 9000;
 }
